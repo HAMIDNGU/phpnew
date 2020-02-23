@@ -1,26 +1,34 @@
 <?php
 
 include('./includes\component\Menu.php');
-include('./includes\DbConn.php');
-include('./includes\secret.php');
+include('./api\config\DbConn.php');
+require_once('./api\config\secret.php');
+require_once("./includes\init.php");
+DbConn::init("127.0.0.1",$username,$pwd,'utf8mb4','communitain');
 
-DbConn::init("127.0.0.1",$user,$pwd,'utf8mb4','communitain');
-$qGetVisit = DbConn::getPDO()->query('SELECT count(*) as submissions FROM submission');
+$qGetMenuItems = DbConn::getPDO()->query('SELECT `title`, `page_key` FROM `menu`');
 
 
 $menuObj = new Menu("main-menu");
-$menuObj->addItem("Home","default");
-$menuObj->addItem("Map","map",1);
-$menuObj->addItem("Buy Tarps","products",-1);
-echo $menuObj->render();
+$menuItems = [];
+$menuKey = [];
 
-while($row = $qGetVisit->fetch()) {
-    echo "<br />{$row['submissions']}";
+while($row = $qGetMenuItems->fetch()) {
+    array_push($menuItems, $row['title']);
+    array_push($menuKey, $row['page_key']);
 }
 
-$menuObj->setDesc(false);
-$menuObj->addItem("Emus","miniostriches",1);
+for ($i=0;$i < count($menuItems); ++$i) { 
+        $menuObj->addItem($menuItems[$i],$menuKey[$i] );
+}
+
+
 echo $menuObj->render();
+
+              echo "<h2>{$pageDetails['title']}</h2>";
+              echo "<p>{$pageDetails['content']}</p>"
+
+
 
 
 
