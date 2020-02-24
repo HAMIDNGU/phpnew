@@ -43,11 +43,11 @@ class Menu {
     }
     // page, text, order, active
     public function render() {
-        $strOut = "<ul class=\"{$this->id}\">";
+        $strOut = "<nav><ul id=\"{$this->id}\">";
        foreach($this->items as $k => $v) {
-            $strOut .= "<li><a href=\"?p=$k\">{$v['text']}</a></li>";
+            $strOut .= "<li><a href=\"?p=$k\">{$v['text']}	&nbsp; </a></li>";
        }
-       $strOut .= "</ul>";
+       $strOut .= "</ul></nav>";
        return $strOut;
     }
 }
