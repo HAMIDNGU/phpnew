@@ -22,14 +22,13 @@ for ($i=0;$i < count($menuItems); ++$i) {
         $menuObj->addItem($menuItems[$i],$menuKey[$i] );
 }
 
-
+include_once("./includes\header.php");
 echo $menuObj->render();
 
-              echo "<h2>{$pageDetails['title']}</h2>";
-              echo "<p>{$pageDetails['content']}</p>"
-
-
-
-
-
 ?>
+</header>
+<main>
+    <?php
+              echo "<h2>{$pageDetails['title']}</h2>";
+              echo "<p>{$pageDetails['content']}</p>";
+include_once("./includes/footer.php");
