@@ -1,5 +1,6 @@
 <?php
  require_once('./api\config\DbConn.php');
+ require_once('./inc/User.php');
 
 $page = 'home';
 DbConn::init("127.0.0.1",$username,$pwd,'utf8mb4','communitain');
@@ -22,3 +23,18 @@ $pQuery =  DbConn::getPDO()->prepare('SELECT title, content FROM '.
         'menu WHERE page_key = ?');
 $pQuery->execute([$page]);
 $pageDetails = $pQuery->fetch();
+
+$res = null;
+if(isset($_POST['username']) && isset($_POST['pass']) 
+&& isset($_POST['action']) && $_POST['action'] === 'login') {
+    $res = User::loginWithPassword($_POST['username'],$_POST['pass']);
+    $res['username'] = $_POST['username'];
+} else if(isset($_COOKIE['ch']) && isset($_COOKIE['user'])){
+    $res = User::loginWithCookie($_COOKIE['user'],$_COOKIE['ch']);
+    $res['username'] = $_COOKIE['user'];
+}
+
+if(isset($res) && $res['status'] === true) {
+    setcookie('ch',$res['cookie'], time()+60*60*24*3);
+    setcookie('user', $res['username'],time()+60*60*24*3);
+}
