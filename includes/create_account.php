@@ -1,5 +1,5 @@
 <?php
-require_once('.\includes\init.php');
+include('init.php');
 ?>
 
         <h2>Sign Up!</h2>

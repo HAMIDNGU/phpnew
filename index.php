@@ -1,8 +1,7 @@
 <?php
 
-include('./includes\component\Menu.php');
-include('./api\config\DbConn.php');
-require_once('./api\config\secret.php');
+include('./includes\class\Menu.php');
+require_once('./includes\secret.php');
 require_once("./includes\init.php");
 DbConn::init("127.0.0.1",$username,$pwd,'utf8mb4','communitain');
 

@@ -1,6 +1,7 @@
 <?php
- require_once('./api\config\DbConn.php');
- require_once('./includes\component\User.php');
+ require_once('./DbConn.php');
+ require_once('./class/User.php');
+ require_once('./secret.php');
 
 $page = 'home';
 DbConn::init("127.0.0.1",$username,$pwd,'utf8mb4','communitain');
