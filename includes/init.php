@@ -29,13 +29,11 @@ $res = null;
 if(isset($_POST['username']) && isset($_POST['pass']) 
 && isset($_POST['action']) && $_POST['action'] === 'login') {
     $res = User::loginWithPassword($_POST['username'],$_POST['pass']);
-    $res['username'] = $_POST['username'];
-} else if(isset($_COOKIE['ch']) && isset($_COOKIE['user'])){
-    $res = User::loginWithCookie($_COOKIE['user'],$_COOKIE['ch']);
-    $res['username'] = $_COOKIE['user'];
+} else if(isset($_COOKIE['ch']) && isset($_COOKIE['u'])){
+    $res = User::loginWithCookie($_COOKIE['u'],$_COOKIE['ch']);
 }
 
 if(isset($res) && $res['status'] === true) {
     setcookie('ch',$res['cookie'], time()+60*60*24*3);
-    setcookie('user', $res['username'],time()+60*60*24*3);
+    setcookie('u', $res['user']['username'],time()+60*60*24*3);
 }

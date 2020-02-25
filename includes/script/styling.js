@@ -9,3 +9,10 @@ document.addEventListener(
   },
   false
 );
+
+window.onload = () => {
+  const loginForm = document.getElementById("login");
+  loginForm.addEventListener("click", ev => {
+    ev.preventDefault();
+  });
+};

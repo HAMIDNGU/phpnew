@@ -1,7 +1,10 @@
 <?php
-require_once('./includes\init.php');
+require_once __DIR__ .('./init.php');
 
-if(isset($result)){
-    echo $result['msg'];
-}
+    if(isset($res)) {
+        echo $res['msg'];
+    }
+       header("Location: http://localhost:5000/projects/phpnew/?p=contribute");
+   exit;
 ?>
+

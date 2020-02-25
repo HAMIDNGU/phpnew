@@ -28,5 +28,5 @@ echo $menuObj->render();
 <main>
     <?php
               echo "<h2>{$pageDetails['title']}</h2>";
-              echo "<p>{$pageDetails['content']}</p>";
+              echo eval('?> ' ."{$pageDetails['content']}".' <?php ');
 include_once("./includes/footer.php");
