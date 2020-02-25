@@ -1,5 +1,5 @@
 <?php
-include('init.php');
+include __DIR__ .('./init.php');
 ?>
 
         <h2>Sign Up!</h2>

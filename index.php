@@ -3,7 +3,6 @@
 include('./includes\class\Menu.php');
 require_once('./includes\secret.php');
 require_once("./includes\init.php");
-DbConn::init("127.0.0.1",$username,$pwd,'utf8mb4','communitain');
 
 $qGetMenuItems = DbConn::getPDO()->query('SELECT `title`, `page_key` FROM `menu`');
 
