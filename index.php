@@ -20,13 +20,16 @@ for ($i=0;$i < count($menuItems); ++$i) {
         $menuObj->addItem($menuItems[$i],$menuKey[$i] );
 }
 
-include_once("./includes\header.php");
+include_once("./includes/static/header.php");
 echo $menuObj->render();
 
 ?>
 </header>
 <main>
     <?php
+            
+            include('./includes/userManage.php');
+        
               echo "<h2>{$pageDetails['title']}</h2>";
               echo eval('?> ' ."{$pageDetails['content']}".' <?php ');
-include_once("./includes/footer.php");
+include_once("./includes/static/footer.php");

@@ -1,6 +1,17 @@
 <?php
 
 class User {
+
+    static function getAll() {
+         $pdo = DbConn::getPDO(); 
+         $r = $pdo->query("SELECT userId, username, `name` FROM user");
+         $results = [];
+         while ($row = $r->fetch()) {
+            $results[] = $row;
+         }
+         return $results;
+    }
+
     // returns true if $username exists in the user table
     static function isUser($username) {
         $pdo = DbConn::getPDO(); // get a reference to the database connection

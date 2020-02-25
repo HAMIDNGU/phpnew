@@ -1,22 +1,23 @@
 <?php
 include __DIR__ .('./init.php');
 
+            include __DIR__ .('./userManage.php');
 
-        if(isset($res)) {
-            echo $res['username'].':'.$res['msg'];
+        if(isset($user)) {
+            echo $user['user']['name'].':'.$user['msg'];
         }
     if(isset($_POST['username']) && isset($_POST['pass']) && 
         isset($_POST['pass_re']) && 
         ($_POST['pass'] === $_POST['pass_re'])
     ) {
 
-        $result = User::create($_POST['username'],$_POST['pass']);
+        $userult = User::create($_POST['username'],$_POST['pass']);
 
-        echo $result['msg'];
+        echo $userult['msg'];
     } else {
 
 ?>
-        <?php }        header("Location: http://localhost:5000/projects/phpnew/?p=contribute");
+        <?php } ;
    exit;?>
         
 
