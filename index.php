@@ -28,7 +28,7 @@ echo $menuObj->render();
 <main>
     <?php
             
-            include('./includes/userManage.php');
+            include('userManage.php');
         
               echo "<h2>{$pageDetails['title']}</h2>";
               echo eval('?> ' ."{$pageDetails['content']}".' <?php ');

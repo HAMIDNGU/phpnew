@@ -5,6 +5,6 @@
         "<a href=\"?logout\">Logout</a>";
     } else {
 ?>
-    Not logged in <a href="?p=login">Login</a>
+    <p id="InOrOut">Not logged in <a href="?p=login">Login</a></p>
     <?php } ?>
 </div>
