@@ -1,7 +1,6 @@
 <?php
 include __DIR__ .('./init.php');
-
-            include __DIR__ .('./userManage.php');
+include __DIR__ .('./userManage.php');
 
         if(isset($user)) {
             echo $user['user']['name'].':'.$user['msg'];
@@ -18,6 +17,7 @@ include __DIR__ .('./init.php');
 
 ?>
         <?php } ;
-   exit;?>
+       header("Location: ../?p=contribute");
+   exit;;?>
         
 
