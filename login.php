@@ -5,7 +5,7 @@ require_once __DIR__ .('./includes/init.php');
         echo $user['msg'];
     }
     include __DIR__ .('/userManage.php');
-    header("Location: ../?p=contribute");
+    header("Location: ./?p=contribute");
    exit;
 ?>
 

@@ -17,7 +17,7 @@ include __DIR__ .('./userManage.php');
 
 ?>
         <?php } ;
-       header("Location: ../?p=contribute");
+       header("Location: ./?p=contribute");
    exit;;?>
         
 
