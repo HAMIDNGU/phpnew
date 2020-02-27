@@ -1,11 +1,12 @@
 <?php
-require_once __DIR__ .('./includes/init.php');
+require_once('./includes/init.php');
+include('./userManage.php');
 
-    if(isset($user)) {
-        echo $user['msg'];
-    }
-    include __DIR__ .('/userManage.php');
-    header("Location: ./?p=contribute");
-   exit;
+if(isset($user)) {
+
+}
+
+header("Location: ./?p=contribute");
+exit;
 ?>
 

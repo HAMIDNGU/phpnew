@@ -17,6 +17,7 @@ window.onload = () => {
   for (let i = 0; i < liArray; ++i) {
     liArray[i].addEventListener("click", () => {
       reRender();
+      console.log(liArray[2]);
       if (i == 2) disableIfNotLoggedIn();
     });
   }
@@ -30,10 +31,11 @@ window.onload = () => {
     }
   };
   reRender();
+  disableIfNotLoggedIn();
 };
 
 const disableIfNotLoggedIn = () => {
-  const loginControl = document.getElementById("InOrOut");
+  const loginControl = document.getElementById("imgprofilePhoto.php");
   const imgSubBtn = document.getElementById("imgSubmit");
   if (loginControl !== null) {
     imgSubBtn.disabled = false;

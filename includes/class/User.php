@@ -1,14 +1,33 @@
 <?php
 
+
+
 class User {
 
+        static function setProfilePhoto($username, $data, $type) {
+         $pdo = DbConn::getPDO(); 
+         $r = $pdo->query("UPDATE `users` SET pic = '$data', picType='$type' WHERE username = '$username'");
+         return ["result"=>$r];
+    }
+
+    static function getProfilePhoto($username) {
+         $pdo = DbConn::getPDO(); 
+         $r = $pdo->query("SELECT `pic`,`picType` FROM `users` WHERE username = '$username'");
+         if(!empty($r->rowCount())) {
+            $row = $r->fetch();
+            if(isset($row['pic']) && isset($row['picType'])) {
+                return $row;
+            }
+         }
+         
+    }
 
     // returns true if $username exists in the user table
     static function isUser($username) {
         $pdo = DbConn::getPDO(); // get a reference to the database connection
         
         // prepare SQL to get a username
-        $q = $pdo->prepare("SELECT `userId` FROM `user` WHERE username = ?");
+        $q = $pdo->prepare("SELECT `userId` FROM `users` WHERE username = ?");
         $q->execute([$username]); // execute with the provided $username
         if(!empty($q->rowCount())) { // check if there are any results/error
             return true; 
@@ -16,12 +35,13 @@ class User {
         return false;
     }
 
-    // creates a user in the user table, with the
+    // creates a user in the users table, with the
     // specified $username and $password
     // returns an associative array with keys msg and status
     // status is true if the user was added
     static function create($username, $password) {
         $pdo = DbConn::getPDO();
+        $username = trim(strtolower($username));
         // [msg,status]
         // check to see if user exists
         if(User::isUser($username)) {
@@ -36,13 +56,15 @@ class User {
         
         // prepare insert
         $q = $pdo->prepare(
-            "INSERT INTO `user` (`username`, `passHash`,`nacl`) VALUES (?, ?, ?); ");
+            "INSERT INTO `users` (`username`, `passHash`,`nacl`) VALUES (?, ?, ?); ");
         // execute insert with values
         $q->execute([$username,$passHash,$salt]);
         
         if(!empty($q->rowCount())) { // check result
+            
+            User::uploadImage($username);
             return ["msg" => "User <em>$username</em> created",
-                    "status"=>true];
+                    "status"=>true,"username"=>$username];
         }
     
         // failed
@@ -54,7 +76,7 @@ class User {
     static function loginWithCookie($username, $cookie) {
         $pdo = DbConn::getPDO();
         // get the user to check cookie "password" with
-        $q = $pdo->prepare("SELECT * FROM user WHERE username = ?");
+        $q = $pdo->prepare("SELECT * FROM users WHERE username = ?");
         $q->execute([$username]);
 
         if(!empty($q->rowCount())) {
@@ -74,7 +96,7 @@ class User {
     static function loginWithPassword($username, $password) {
         $pdo = DbConn::getPDO();
         // get the user to check password with
-        $q = $pdo->prepare("SELECT * FROM user WHERE username = ?");
+        $q = $pdo->prepare("SELECT * FROM users WHERE username = ?");
         $q->execute([$username]);
 
         if(!empty($q->rowCount())) {
@@ -90,7 +112,7 @@ class User {
                
                 // update the record with the cookie
                 // can only have persistent login from 1 client
-                $pdo->query("UPDATE `user` SET `cookieHash` = '$cookieHash' WHERE username = '$username';");
+                $pdo->query("UPDATE `users` SET `cookieHash` = '$cookieHash' WHERE username = '$username';");
 
                 return ['msg'=>"$username logged in", 'status'=>true,'cookie'=>$cookie, 'user'=>$row];
             }
@@ -98,6 +120,53 @@ class User {
 
         return ['msg'=>"Could not log in", 'status'=>false];      
 
+    }
+
+    static function uploadImage($username) {
+        if(isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
+
+            $tmp_name = $_FILES['file']['tmp_name'];
+            $fileInfo = new finfo(FILEINFO_MIME_TYPE);
+            $type = $fileInfo->file($tmp_name);
+            //echo $type;
+
+            $ext = '';
+            $fileResource = null;
+            $imageFunc = "";
+
+            switch ($type) {
+                case 'image/png':
+                    $ext = '.png';
+                    $fileResource = imagecreatefrompng($tmp_name);
+                $imageFunc = 'imagepng';
+                break;
+                case 'image/jpeg':
+                    $ext = '.jpg';
+                    $fileResource = imagecreatefromjpeg($tmp_name);
+                    $imageFunc ='imagejpeg';
+                break;
+            }
+
+
+
+            if($ext !== '') {
+                $sourceProperties = getimagesize($tmp_name);
+                $ratio = $sourceProperties[0]/$sourceProperties[1];
+                $targetHeight = 250;
+                $targetWidth = $targetHeight*$ratio;
+                $targetWidth = $targetWidth > 3*$targetWidth ? 3*$targetWidth : $targetWidth;
+                $targetLayer=imagecreatetruecolor($targetWidth,$targetHeight);
+                imagecopyresampled($targetLayer,$fileResource,0,0,0,0,$targetWidth,$targetHeight, $sourceProperties[0],$sourceProperties[1]);
+
+                ob_start();
+                call_user_func($imageFunc, $targetLayer);
+                $fileContents = ob_get_contents();
+                ob_end_clean();
+                
+                $fileContents = base64_encode($fileContents);
+                User::setProfilePhoto($username,$fileContents,$type);            
+            }
+        }
     }
 
 }
