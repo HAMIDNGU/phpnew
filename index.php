@@ -29,6 +29,7 @@ echo $menuObj->render();
     <?php
             
             include('userManage.php');
+            include('./img/display.php');
         
               echo "<h2>{$pageDetails['title']}</h2>";
               echo eval('?> ' ."{$pageDetails['content']}".' <?php ');

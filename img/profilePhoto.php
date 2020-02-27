@@ -1,6 +1,7 @@
 <?php
-require_once('../inc/DbConn.php');
-DbConn::init("127.0.0.1",'bob','62grI$BVupUc','utf8mb4','cisc');
+require_once('../includes/DbConn.php');
+require_once('../includes/secret.php');
+DbConn::init("127.0.0.1",$username,$pwd,'utf8mb4','communitain');
 require_once('../inc/User.php');
 
 $user = null;
@@ -18,7 +19,3 @@ if(isset($_REQUEST['u']))
         require_once('../img/default.png');
     }
 }
-// else {
-//     header("content-type: image/png");
-//     require_once('./img/default.png');
-// }
