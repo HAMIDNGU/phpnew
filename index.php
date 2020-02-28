@@ -4,7 +4,7 @@ include('./includes\class\Menu.php');
 require_once('./includes\secret.php');
 require_once("./includes\init.php");
 
-$qGetMenuItems = DbConn::getPDO()->query('SELECT `title`, `page_key` FROM `menu`');
+$qGetMenuItems = DbConn::getPDO()->query('SELECT `title`, `page_key` FROM `menu` WHERE showInMenu = 1');
 
 
 $menuObj = new Menu("main-menu");

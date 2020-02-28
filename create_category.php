@@ -9,6 +9,6 @@ if(isset($_POST['category']) && isset($_POST['description'])
     } else {
         echo "whoops";
     }
-   /* header("Location: ./?p=contribute");
-   exit; */
+   header("Location: ./?p=contribute");
+   exit; 
 ?>

@@ -7,17 +7,16 @@ $query = $pdo->prepare("SELECT id,`name` FROM `category` ORDER BY `modified` DES
 $query->execute();
 $qty = $query->rowCount();
 
-
-// https://www.codeofaninja.com/2011/02/display-image-from-database-in-php.html
-// https://stackoverflow.com/questions/10911757/how-to-use-pdo-to-fetch-results-array-in-php
 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
     for($i = 0; $i < $qty; ++$i){
     $id = $row['id'];
     $name = $row['name'];
+    if($i%2 == 0) {
     echo "<div>";
-    echo "<h4> $name </h4>";
     echo "<img src='./img/categoryPhoto.php?id=$id />";
+    echo '<h4><a href="../phpnew/?p=home">'. $name .'</a></h4>';
     echo "</div>";
+    }
 
     }
 }

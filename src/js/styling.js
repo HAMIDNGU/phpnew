@@ -13,15 +13,12 @@ document.addEventListener(
 window.onload = () => {
   const liArray = document.getElementsByTagName("li");
   const signInLi = liArray[1];
-  const registerInLi = liArray[3];
-  console.log(registerInLi);
+
   const removeSignIn = () => {
     if (getCookie("u") !== "") {
       signInLi.style.display = "none";
-      registerInLi.display = "none";
     } else {
       signInLi.style.display = "flex";
-      registerInLi.display = "flex";
     }
   };
 
