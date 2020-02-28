@@ -14,7 +14,11 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
     for($i = 0; $i < $qty; ++$i){
     $id = $row['id'];
     $name = $row['name'];
-    echo "<div> <h4> $name </h4> <img src='./img/categoryPhoto.php?id=$id />";
+    echo "<div>";
+    echo "<h4> $name </h4>";
+    echo "<img src='./img/categoryPhoto.php?id=$id />";
+    echo "</div>";
+
     }
 }
 

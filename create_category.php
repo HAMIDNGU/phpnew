@@ -5,7 +5,7 @@ include('./includes/class/category.php');
 if(isset($_POST['category']) && isset($_POST['description'])
     ) {
         $cateult = Category::create($_POST['category'],$_POST['description']);
-        echo $userult['msg'];
+        echo $cateult['msg'];
     } else {
         echo "whoops";
     }

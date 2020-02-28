@@ -6,7 +6,7 @@ class Category {
         $pdo = DbConn::getPDO(); // get a reference to the database connection
         
         // prepare SQL to get a category
-        $q = $pdo->prepare("SELECT `id` FROM `category` WHERE category = ?");
+        $q = $pdo->prepare("SELECT `id` FROM `category` WHERE `name` = ?");
         $q->execute([$category]); // execute with the provided $category
         if(!empty($q->rowCount())) { // check if there are any results/error
             return true; 
