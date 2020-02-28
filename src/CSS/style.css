@@ -23,11 +23,13 @@ footer {
 }
 
 html {
-  background-image: linear-gradient(rgb(22, 22, 22), rgb(12, 12, 12));
+  /* background-image: linear-gradient(rgb(31, 104, 173), rgb(41, 126, 160)); */
+
   background-size: contain;
   background-repeat: no-repeat;
-  color: rgb(153, 153, 153);
+  color: rgb(255, 255, 255);
   height: 100%;
+  /* width: 100%; */
 }
 
 #footer.stickyfoot {
@@ -46,13 +48,21 @@ html {
 
 #main-menu > li > a {
   text-decoration: none;
-  color: rgb(182, 182, 182);
+  color: rgb(255, 255, 255);
+  font-size: x-large;
 }
 
 body {
+  /* background-image: url("https://as1.ftcdn.net/jpg/01/25/30/80/500_F_125308059_DQXXsOtLibCU9iLgnUlabsAqI6n4HHlL.jpg"); */
+  background-image: url("../img/bg.jpg");
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
 }
 
 .footerBackground {
@@ -96,4 +106,23 @@ body {
 .materialBtn {
   transform: scale(var(--mdc-ripple-fg-scale, 1));
   border-radius: 30%;
+}
+
+form,
+.content {
+  /* width: 40%; */
+  margin: 0px auto;
+  padding: 85px;
+  border: 1px solid #b0c4de;
+  background: rgb(112, 103, 103);
+  border-radius: 10px 10px 10px 10px;
+}
+
+.login {
+  color: rgb(255, 255, 255);
+}
+
+a {
+  color: rgb(224, 221, 39);
+  font-size: x-large;
 }
