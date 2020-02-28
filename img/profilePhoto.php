@@ -16,6 +16,6 @@ if(isset($_REQUEST['u']))
         echo base64_decode($photo['pic']);
     } else {
         header("content-type: image/png");
-        require_once('../img/default.png');
+        require_once('default.png');
     }
 }
