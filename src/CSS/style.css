@@ -15,6 +15,10 @@ footer {
   display: flex;
   list-style-type: none;
   padding-left: 0px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  position: fixed;
 }
 
 #fImageList > li > a > img {
@@ -54,7 +58,7 @@ html {
 
 body {
   /* background-image: url("https://as1.ftcdn.net/jpg/01/25/30/80/500_F_125308059_DQXXsOtLibCU9iLgnUlabsAqI6n4HHlL.jpg"); */
-  background-image: url("../img/bg.jpg");
+  background-image: url("../img/bg2.jpg");
   display: grid;
   grid-template-columns: 1fr;
   justify-items: center;
@@ -125,4 +129,16 @@ form,
 a {
   color: rgb(224, 221, 39);
   font-size: x-large;
+}
+
+#userContent {
+  display: inline-flex;
+  padding-block: 50px;
+}
+
+img {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px;
+  width: 100px;
 }
