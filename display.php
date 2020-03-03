@@ -1,3 +1,4 @@
+
 <?php
 require_once('./includes/DbConn.php');
 require_once('./includes/secret.php');
@@ -20,9 +21,3 @@ while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
 
     }
 }
-
-
-
-
-
-?>

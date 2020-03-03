@@ -96,4 +96,3 @@ static function uploadImage($category) {
 }
 
     
-?>

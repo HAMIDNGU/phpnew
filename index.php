@@ -1,12 +1,10 @@
 <?php
 
-include('./includes\component\Menu.php');
-include('./api\config\DbConn.php');
-require_once('./api\config\secret.php');
+include('./includes\class\Menu.php');
+require_once('./includes\secret.php');
 require_once("./includes\init.php");
-DbConn::init("127.0.0.1",$username,$pwd,'utf8mb4','communitain');
 
-$qGetMenuItems = DbConn::getPDO()->query('SELECT `title`, `page_key` FROM `menu`');
+$qGetMenuItems = DbConn::getPDO()->query('SELECT `title`, `page_key` FROM `menu` WHERE showInMenu = 1');
 
 
 $menuObj = new Menu("main-menu");
@@ -22,13 +20,17 @@ for ($i=0;$i < count($menuItems); ++$i) {
         $menuObj->addItem($menuItems[$i],$menuKey[$i] );
 }
 
-include_once("./includes\header.php");
+include_once("./includes/static/header.php");
 echo $menuObj->render();
 
 ?>
 </header>
 <main>
     <?php
+            
+            include('userManage.php');
+            
+        
               echo "<h2>{$pageDetails['title']}</h2>";
-              echo "<p>{$pageDetails['content']}</p>";
-include_once("./includes/footer.php");
+              echo eval('?> ' ."{$pageDetails['content']}".' <?php ');
+include_once("./includes/static/footer.php");
