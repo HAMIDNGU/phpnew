@@ -19,3 +19,4 @@ if(isset($_REQUEST['u']))
         require_once('default.png');
     }
 }
+
